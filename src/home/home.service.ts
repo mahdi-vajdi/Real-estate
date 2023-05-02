@@ -45,16 +45,19 @@ interface UpdateHomeParams {
 export class HomeService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async createHome({
-    address,
-    numberOfbedrooms,
-    numberOfBathrooms,
-    city,
-    price,
-    landSize,
-    propertyType,
-    images,
-  }: CreateHomeParams) {
+  async createHome(
+    {
+      address,
+      numberOfbedrooms,
+      numberOfBathrooms,
+      city,
+      price,
+      landSize,
+      propertyType,
+      images,
+    }: CreateHomeParams,
+    userId: number,
+  ) {
     const home = await this.prismaService.home.create({
       data: {
         address,
@@ -64,7 +67,7 @@ export class HomeService {
         property_type: propertyType,
         price,
         city,
-        realtor_id: 6,
+        realtor_id: userId,
       },
     });
 
@@ -155,5 +158,27 @@ export class HomeService {
         id,
       },
     });
+  }
+
+  async getRealtorByHomeId(id: number) {
+    const home = await this.prismaService.home.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        realtor: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+          },
+        },
+      },
+    });
+
+    if (!home) throw new NotFoundException();
+
+    return home.realtor;
   }
 }
