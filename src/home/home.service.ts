@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { HomeResponseDto } from './dto/home.dto';
 import { PropertyType } from '@prisma/client';
-import { TokenUser } from 'src/user/decorators/user.decorator';
+import { TokenUser } from 'src/users/decorators/users.decorator';
 
 interface CreateHomeParams {
   address: string;

@@ -2,7 +2,7 @@ import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import * as jwt from 'jsonwebtoken';
 
-export class UserInterceptor implements NestInterceptor {
+export class UsersInterceptor implements NestInterceptor {
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>,

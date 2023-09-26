@@ -18,8 +18,8 @@ import {
   UpdateHomeDto,
 } from './dto/home.dto';
 import { PropertyType, UserType } from '@prisma/client';
-import { TokenUser, User } from 'src/user/decorators/user.decorator';
 import { Roles } from 'src/decorators/roles.decorator';
+import { TokenUser, User } from 'src/users/decorators/users.decorator';
 
 @Controller('home')
 export class HomeController {
